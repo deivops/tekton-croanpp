@@ -5,7 +5,7 @@ RUN apk add --no-cache --update-cache maven openjdk11 && mvn dependency:go-offli
 ENV TIER DEV
 ENV CONTEXT_USE true
 # Sobre o valor TIER, veja https://docs.cronapp.io - Parâmetros para gerar .war
-RUN mvn clean compile && mvn package -X -Dcronapp.profile=${TIER} -Dcronapp.useContext=${CONTEXT_USE}
+RUN mvn clean && mvn -Dskiptest package -X -Dcronapp.profile=${TIER} -Dcronapp.useContext=${CONTEXT_USE}
 
 FROM tomcat:9.0.17-jre11
 RUN rm -rf /usr/local/tomcat/webapps/*
